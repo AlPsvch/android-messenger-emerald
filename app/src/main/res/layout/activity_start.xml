@@ -3,23 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".StartActivity">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
-        android:text="Welcome to Emerald"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="250dp"
+        android:text="@string/welcome_to_emerald"
+        android:textColor="@android:color/white"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/start_reg_button"
-        android:layout_width="wrap_content"
+        android:layout_width="269dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="187dp"
+        android:layout_marginBottom="100dp"
+        android:paddingLeft="21dp"
+        android:paddingRight="21dp"
         android:text="@string/need_a_new_account" />
+
+    <Button
+        android:id="@+id/start_login_btn"
+        android:layout_width="268dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="155dp"
+        android:backgroundTint="@color/colorAccent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/already_have_account" />
 </RelativeLayout>

@@ -1,10 +1,13 @@
 package com.example.emerald;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,6 +24,11 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout mPassword;
     private Button mCreateButton;
 
+    private Toolbar mToolbar;
+
+    //Progress dialog
+    private ProgressDialog mRegProgress;
+
     //Firebase Auth
     private FirebaseAuth mAuth;
 
@@ -28,6 +36,14 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        //Toolbar set
+        mToolbar = findViewById(R.id.register_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Create Account");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mRegProgress = new ProgressDialog(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -41,14 +57,18 @@ public class RegisterActivity extends AppCompatActivity {
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    String displayName = mDisplayName.getEditText().getText().toString();
-                    String email = mEmail.getEditText().getText().toString();
-                    String password = mPassword.getEditText().getText().toString();
+                String displayName = mDisplayName.getEditText().getText().toString();
+                String email = mEmail.getEditText().getText().toString();
+                String password = mPassword.getEditText().getText().toString();
+
+                if (!TextUtils.isEmpty(displayName) && !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
+
+                    mRegProgress.setTitle("Registering User");
+                    mRegProgress.setMessage("Please wait while creating your account!");
+                    mRegProgress.setCanceledOnTouchOutside(false);
+                    mRegProgress.show();
 
                     registerUser(displayName, email, password);
-                } catch(NullPointerException e) {
-                    System.out.println(e.getMessage());
                 }
             }
         });
@@ -59,11 +79,15 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
+                    mRegProgress.dismiss();
+
                     Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(mainIntent);
                     finish();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "You got some error", Toast.LENGTH_LONG).show();
+                    mRegProgress.hide();
+                    Toast.makeText(RegisterActivity.this, "Cannot Sign in. Please check the form and try again", Toast.LENGTH_LONG).show();
                 }
             }
         });
