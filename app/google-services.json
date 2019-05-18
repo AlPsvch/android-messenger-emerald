@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "678940199415",
+    "firebase_url": "https://emerald-bdd79.firebaseio.com",
+    "project_id": "emerald-bdd79",
+    "storage_bucket": "emerald-bdd79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678940199415:android:6bcd16ff0fdeac00",
+        "android_client_info": {
+          "package_name": "com.example.emerald"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678940199415-jdepe0p9proqu2ekt3q1dmv1ssgk704l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.emerald",
+            "certificate_hash": "dbce43227f5acb9d40a9f6a03f285a16c0236902"
+          }
+        },
+        {
+          "client_id": "678940199415-nv5bibktnnsmg0enkd7ukng7c97s039r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRaoZtD83Y-xwqK84PFjgUuRNMLaSh4ig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678940199415-nv5bibktnnsmg0enkd7ukng7c97s039r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
