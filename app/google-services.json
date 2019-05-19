@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "678940199415-ejg2mubuiacvmv92tnrcot3v5ooa8dbm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.emerald",
+            "certificate_hash": "48bb87dfce31ad2940a3d1878e6db99281c3252f"
+          }
+        },
+        {
           "client_id": "678940199415-jdepe0p9proqu2ekt3q1dmv1ssgk704l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -13,4 +13,13 @@
     <string name="login_to_your_account">Login to your Account</string>
     <string name="create_a_new_account">Create a New Account</string>
     <string name="login">LOGIN</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hi_there_i_m_using_emerald_chat_app">Hi there, I\'m using Emerald Chat App</string>
+    <string name="change_status">CHANGE STATUS</string>
+    <string name="change_image">CHANGE IMAGE</string>
+    <string name="settings_display_name">Display Name</string>
+    <string name="your_status">Your Status</string>
+    <string name="save_changes">SAVE CHANGES</string>
 </resources>

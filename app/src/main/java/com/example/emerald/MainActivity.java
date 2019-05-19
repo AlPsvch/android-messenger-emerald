@@ -2,6 +2,8 @@ package com.example.emerald;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Toolbar mToolbar;
 
+    private ViewPager mViewPager;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    private TabLayout mTabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Emerald");
+
+        //Tabs
+        mViewPager = findViewById(R.id.main_tab_pager);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        mTabLayout = findViewById(R.id.main_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+
     }
 
     @Override
@@ -61,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.main_logout_btn) {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
+        }
+
+        if(item.getItemId() == R.id.main_settings_btn) {
+            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
         }
 
         return true;
