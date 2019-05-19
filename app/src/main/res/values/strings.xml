@@ -22,4 +22,8 @@
     <string name="settings_display_name">Display Name</string>
     <string name="your_status">Your Status</string>
     <string name="save_changes">SAVE CHANGES</string>
+    <string name="user_status">User status</string>
+    <string name="total_friends">Total Friends</string>
+    <string name="send_friend_request">SEND FRIEND REQUEST</string>
+    <string name="decline_friend_request">DECLINE FRIEND REQUEST</string>
 </resources>
