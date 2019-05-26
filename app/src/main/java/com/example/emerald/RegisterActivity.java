@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -88,11 +89,14 @@ public class RegisterActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
                     String uid = currentUser.getUid();
+                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
                     HashMap<String, String> userMap = new HashMap<>();
+                    userMap.put("device_token", deviceToken);
                     userMap.put("name", displayName);
                     userMap.put("status", DEFAULT_STATUS);
                     userMap.put("image", "default");
