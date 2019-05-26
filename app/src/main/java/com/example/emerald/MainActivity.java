@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
+    private DatabaseReference mUserRef;
+
     private TabLayout mTabLayout;
+
+    private FirebaseUser mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+        mCurrentUser = mAuth.getCurrentUser();
 
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -53,11 +61,24 @@ public class MainActivity extends AppCompatActivity {
 
         if (currentUser == null) {
             sendToStart();
+        } else {
+            mUserRef = FirebaseDatabase.getInstance().getReference()
+                    .child("Users").child(mAuth.getCurrentUser().getUid());
+
+            mUserRef.child("online").setValue(true);
         }
     }
 
+
     private void sendToStart() {
         Intent startIntent = new Intent(MainActivity.this, StartActivity.class);
+
+        if (mAuth.getCurrentUser() != null) {
+            startIntent.putExtra("userId", mCurrentUser.getUid());
+        }
+
+        FirebaseAuth.getInstance().signOut();
+
         startActivity(startIntent);
         finish();
     }
@@ -75,17 +96,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        if(item.getItemId() == R.id.main_logout_btn) {
-            FirebaseAuth.getInstance().signOut();
+        if (item.getItemId() == R.id.main_logout_btn) {
             sendToStart();
         }
 
-        if(item.getItemId() == R.id.main_settings_btn) {
+        if (item.getItemId() == R.id.main_settings_btn) {
             Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
 
-        if(item.getItemId() == R.id.main_all_btn) {
+        if (item.getItemId() == R.id.main_all_btn) {
             Intent usersIntent = new Intent(MainActivity.this, UsersActivity.class);
             startActivity(usersIntent);
         }

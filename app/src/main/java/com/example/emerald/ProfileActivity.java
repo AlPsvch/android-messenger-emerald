@@ -40,12 +40,14 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mFriendDatabase;
     private DatabaseReference mNotificationDatabase;
     private DatabaseReference mRootRef;
+    private DatabaseReference mUserRef;
 
     private FirebaseUser mCurrentUser;
 
     private ProgressDialog mProgress;
 
     private String mCurrentState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
         mFriendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
         mNotificationDatabase = FirebaseDatabase.getInstance().getReference().child("Notifications");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
 
         mProfileImage = findViewById(R.id.profile_image);
         mProfileName = findViewById(R.id.profile_display_name);
@@ -334,6 +338,15 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mUserRef.child("online").setValue(true);
 
     }
 }

@@ -1,10 +1,10 @@
 package com.example.emerald;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +25,8 @@ public class StatusActivity extends AppCompatActivity {
     private Button mSaveButton;
 
     private DatabaseReference mStatusDatabase;
+    private DatabaseReference mUserRef;
+
     private FirebaseUser mCurrentUser;
 
     private ProgressDialog mProgress;
@@ -37,6 +39,7 @@ public class StatusActivity extends AppCompatActivity {
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUid = mCurrentUser.getUid();
 
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid);
         mStatusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid);
 
         mToolbar = findViewById(R.id.status_app_bar);
@@ -77,5 +80,13 @@ public class StatusActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mUserRef.child("online").setValue(true);
     }
 }

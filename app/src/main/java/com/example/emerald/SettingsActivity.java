@@ -4,10 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,14 +30,12 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
@@ -45,6 +43,8 @@ import id.zelory.compressor.Compressor;
 public class SettingsActivity extends AppCompatActivity {
 
     private DatabaseReference mUserDatabase;
+    private DatabaseReference mUserRef;
+
     private FirebaseUser mCurrentUser;
 
     private CircleImageView mDisplayImage;
@@ -78,7 +78,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         String currentUid = mCurrentUser.getUid();
 
-
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid);
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUid);
         mUserDatabase.keepSynced(true);
 
@@ -207,7 +207,7 @@ public class SettingsActivity extends AppCompatActivity {
                                             uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumbTask) {
-                                                    if(thumbTask.isSuccessful()) {
+                                                    if (thumbTask.isSuccessful()) {
 
                                                         mImageStorage.child("profile_images").child("thumbs").child(currentUserId + ".jpg").getDownloadUrl()
                                                                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -251,5 +251,13 @@ public class SettingsActivity extends AppCompatActivity {
                 Exception error = result.getError();
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mUserRef.child("online").setValue(true);
+
     }
 }
