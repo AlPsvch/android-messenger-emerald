@@ -31,7 +31,6 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView mProfileImage;
     private TextView mProfileName;
     private TextView mProfileStatus;
-    private TextView mProfileFriends;
     private Button mProfileSendReqBtn;
     private Button mProfileDeclineBtn;
 
@@ -69,7 +68,6 @@ public class ProfileActivity extends AppCompatActivity {
         mProfileImage = findViewById(R.id.profile_image);
         mProfileName = findViewById(R.id.profile_display_name);
         mProfileStatus = findViewById(R.id.profile_status);
-        mProfileFriends = findViewById(R.id.profile_total_friends);
         mProfileSendReqBtn = findViewById(R.id.profile_send_req_btn);
         mProfileDeclineBtn = findViewById(R.id.profile_decline_req_btn);
 

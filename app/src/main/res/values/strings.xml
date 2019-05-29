@@ -27,4 +27,6 @@
     <string name="send_friend_request">SEND FRIEND REQUEST</string>
     <string name="decline_friend_request">DECLINE FRIEND REQUEST</string>
     <string name="enter_message">Enter message...</string>
+    <string name="message_text">Message Text</string>
+    <string name="_00_00">00:00</string>
 </resources>

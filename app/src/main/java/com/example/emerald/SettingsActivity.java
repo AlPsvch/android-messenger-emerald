@@ -198,7 +198,7 @@ public class SettingsActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             mImageStorage.child("profile_images").child(currentUserId + ".jpg").getDownloadUrl()
-                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    .addOnSuccessListener(  new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             final String downloadUrl = uri.toString();

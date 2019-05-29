@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/message_single_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:paddingLeft="10dp"
+    android:paddingTop="15dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="15dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/message_profile_layout"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_centerVertical="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="0dp"
         android:src="@drawable/hi" />
+
+    <TextView
+        android:id="@+id/name_text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@id/message_profile_layout"
+        android:text="@string/display_name"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/message_text_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="78dp"
-        android:layout_marginTop="12dp"
-        android:autoLink="all"
-        android:autoText="false"
-        android:background="@drawable/message_text_background"
-        android:gravity="center"
-        android:minWidth="100dp"
-        android:minHeight="35dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="TextView"
-        android:textColor="@android:color/white" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="23dp"
+        android:layout_toEndOf="@id/message_profile_layout"
+        android:maxWidth="240dp"
+        android:text="@string/message_text"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/time_text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/name_text_layout"
+        android:text="@string/_00_00" />
 
 </RelativeLayout>
